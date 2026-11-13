@@ -7,8 +7,7 @@ import { ImapProvider } from './providers/imap'
 import { profileFor } from './providers/profiles'
 
 /** Builds the provider for an account. Demo mailboxes are saved to `dataDir` so they survive restarts. */
-export function providerFactory(dataDir: string): ProviderFactory {
-  const demoBoxes = new Map<number, FakeMailbox>()
+export function providerFactory(dataDir: string, demoBoxes: Map<number, FakeMailbox>): ProviderFactory {
   return async (account, secret, core) => {
     if (account.provider === 'demo') return new FakeProvider(demoMailbox(dataDir, account.id, demoBoxes), { withBodies: true })
     const profile = profileFor(account.provider, account.config)

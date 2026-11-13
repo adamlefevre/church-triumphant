@@ -6,12 +6,7 @@ import { resolve } from 'node:path'
 export default defineConfig({
   main: {
     build: {
-      rollupOptions: {
-        input: {
-          index: resolve(__dirname, 'src/main/index.ts'),
-          core: resolve(__dirname, 'src/core/process.ts'),
-        },
-      },
+      rollupOptions: { input: { index: resolve(__dirname, 'src/main/index.ts') } },
     },
   },
   preload: {
