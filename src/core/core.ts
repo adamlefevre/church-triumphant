@@ -211,6 +211,11 @@ export class Core implements Api {
     return accounts
   }
 
+  /** Replaces an account's stored secret, e.g. when a refresh token rotates. */
+  async updateSecret(accountId: number, secret: AccountSecret) {
+    this.db.run('UPDATE accounts SET secret = ? WHERE id = ?', await this.opts.host.encrypt(JSON.stringify(secret)), accountId)
+  }
+
   /** Used by the demo seeder. */
   addAccountRecord(provider: Account['provider'], email: string, name: string) {
     return this.insertAccount(provider, email, name, {})
